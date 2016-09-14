@@ -21,7 +21,7 @@ logger.info("");
 
 var mqtt = require('mqtt').connect(mqttServerUrl);
 
-console.log('connecting InfluxDB', config['influx-host']);
+console.log('Connecting to InfluxDB', config['influx-host']);
 var influx = require('influx')({
     host: influxdbHost,
     port: influxdbPort,

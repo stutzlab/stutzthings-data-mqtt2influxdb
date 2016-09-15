@@ -13,7 +13,7 @@ const influxdbDatabase = process.env.INFLUXDB_DATABASE || "stutzthings_mqtt";
 logger.info("Starting StutzThings MQTT to InfluxDB Bridge");
 logger.info("");
 logger.info("mqttServerUrl: " + mqttServerUrl);
-logger.info("mqttPrefixPath: " + mqttPrefixPath);
+logger.info("mqttTopicPattern: " + mqttTopicPattern);
 logger.info("influxdbHost: " + influxdbHost);
 logger.info("influxdbPort: " + influxdbPort);
 logger.info("influxdbDatabase: " + influxdbDatabase);
@@ -21,7 +21,7 @@ logger.info("");
 
 var mqtt = require('mqtt').connect(mqttServerUrl);
 
-console.log('Connecting to InfluxDB', config['influx-host']);
+console.log('Connecting to InfluxDB', influxdbHost);
 var influx = require('influx')({
     host: influxdbHost,
     port: influxdbPort,
@@ -106,9 +106,9 @@ function flushToInfluxDB() {
         } else {
           logger.info("Flushed " + bufferCount + " points to InfluxDB");
         }
+        buffer = {};
+        bufferCount = 0;
     });
-    buffer = {};
-    bufferCount = 0;
 }
 
 //flush mqtt changes to influxdb

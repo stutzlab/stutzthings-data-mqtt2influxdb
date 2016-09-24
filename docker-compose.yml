@@ -1,2 +1,2 @@
-mqtt2influxdb:
+data_mqtt2influxdb:
   build: .

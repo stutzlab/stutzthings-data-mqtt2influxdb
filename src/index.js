@@ -3,10 +3,10 @@
 const logger = require("./logger.js");
 logger.level = "debug";
 
-const mqttServerUrl = process.env.MQTT_SERVER_URL || "mqtt://mqtt.stutzthings.com:1883";
+const mqttServerUrl = process.env.MQTT_SERVER_URL || "mqtt://mqtt.devices.stutzthings.com:1883";
 const mqttTopicPattern = process.env.MQTT_TOPIC_PATTERN || "#";
 
-const influxdbHost = process.env.INFLUXDB_SERVER_HOST || "influxdb.stutzthings.com";
+const influxdbHost = process.env.INFLUXDB_SERVER_HOST || "influxdb.data.stutzthings.com";
 const influxdbPort = process.env.INFLUXDB_SERVER_PORT || 8086;
 const influxdbDatabase = process.env.INFLUXDB_DATABASE || "stutzthings_mqtt";
 

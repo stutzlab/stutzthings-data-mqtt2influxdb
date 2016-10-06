@@ -82,8 +82,7 @@ mqtt.on('message', function (topic, payload, msg) {
     } else if (value === false || value === 'false') {
         value = '0.0';
     } else if (isNaN(valueFloat)) {
-        // return; // FIXME do we need strings? Creating a field as string leads to errors when trying to write float on it. Can we expect topics to be of the same type always?
-        value = '"' + value + '"';
+        //value = '"' + value + '"';
     } else {
         value = '' + valueFloat;
         if (!value.match(/\./)) value = value + '.0';

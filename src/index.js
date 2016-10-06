@@ -6,8 +6,8 @@ logger.level = "debug";
 const mqttServerUrl = process.env.MQTT_SERVER_URL || "mqtt://mqtt.devices.stutzthings.com:1883";
 const mqttTopicPattern = process.env.MQTT_TOPIC_PATTERN || "#";
 
-const influxdbHost = process.env.INFLUXDB_SERVER_HOST || "influxdb.data.stutzthings.com";
-const influxdbPort = process.env.INFLUXDB_SERVER_PORT || 8086;
+const influxdbHost = process.env.INFLUXDB_SERVER_HOST || "influxdbapi.data.stutzthings.com";
+const influxdbPort = process.env.INFLUXDB_SERVER_PORT || 80;
 const influxdbDatabase = process.env.INFLUXDB_DATABASE || "stutzthings_mqtt";
 
 logger.info("Starting StutzThings MQTT to InfluxDB Bridge");

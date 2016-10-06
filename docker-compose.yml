@@ -1,2 +1,3 @@
 data_mqtt2influxdb:
   build: .
+  restart: always

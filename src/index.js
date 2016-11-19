@@ -80,7 +80,7 @@ mqtt.on('message', function (topic, payload, msg) {
     //avoid parsing to float things like versio numbers (ex.: 1.2.1)
     if(value.split("\.").length<=2) {
       valueFloat = parseFloat(value);
-      if(isNAN(valueFloat)) {
+      if(isNaN(valueFloat)) {
         valueFloat = null;
       }
     }

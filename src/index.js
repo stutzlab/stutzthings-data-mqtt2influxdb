@@ -84,8 +84,9 @@ mqtt.on('message', function (topic, payload, msg) {
     } else if (isNaN(valueFloat)) {
         //value = '"' + value + '"';
     } else {
-        value = '' + valueFloat;
-        if (!value.match(/\./)) value = value + '.0';
+        // value = '' + valueFloat;
+        // if (!value.match(/\./)) value = value + '.0';
+        value = valueFloat;
     }
 
     logger.info("Point received: " + seriesName + " => " + timestamp + ", " + value);

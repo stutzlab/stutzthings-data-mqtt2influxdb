@@ -65,7 +65,7 @@ mqtt.on('message', function (topic, payload, msg) {
     // var seriesName = topic.replace(/^([^\/]+)\/status\/(.+)/, '$1//$2');
     var seriesName = topic;
 
-    var value = payload;
+    var value = payload + "";
 
     //TODO create one series per attribute when mqtt payload has JSON contents
     // try {
@@ -75,23 +75,26 @@ mqtt.on('message', function (topic, payload, msg) {
     // } catch (e) {
     //     value = payload;
     // }
-    var valueFloat = parseFloat(value);
+    var valueFloat = null;
 
-    if (value === true || value === 'true') {
-        value = '1.0';
-    } else if (value === false || value === 'false') {
-        value = '0.0';
-    } else if (isNaN(valueFloat)) {
-        //value = '"' + value + '"';
-    } else {
-        // value = '' + valueFloat;
-        // if (!value.match(/\./)) value = value + '.0';
-        value = valueFloat;
+    //avoid parsing to float things like versio numbers (ex.: 1.2.1)
+    if(value.split("\.").length<=2) {
+      valueFloat = parseFloat(value);
+    }
+
+    if (value == 'true') {
+        valueFloat = 1;
+    } else if (value == 'false') {
+        valueFloat = 0;
     }
 
     logger.info("Point received: " + seriesName + " => " + timestamp + ", " + value);
     if (!buffer[seriesName]) buffer[seriesName] = [];
-    buffer[seriesName].push([{value: value, time: timestamp}]);
+    if(valueFloat!=null) {
+      buffer[seriesName].push([{value: valueFloat, time: timestamp}]);
+    } else {
+      buffer[seriesName].push([{valueStr: value, time: timestamp}]);
+    }
     bufferCount += 1;
     if (bufferCount > 1000) flushToInfluxDB();
 
